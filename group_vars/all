@@ -1,0 +1,49 @@
+---
+# Setup: set according to your application needs
+
+# application name
+app_name: project_name
+
+# RAILS_ENV
+rails_env: production
+
+# config timezone
+time_zone: 'America/Brasilia'
+
+# ubuntu repository
+# ubuntu_repo_install: 'deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe'
+
+# ruby select version to install
+ruby_version: ruby-2.1
+ruby_repo_install: 'deb http://apt.hellobits.com/ precise main'
+ruby_url: http://apt.hellobits.com/hellobits.key
+
+# nginx installation
+nginx_url: http://nginx.org/keys/nginx_signing.key
+nginx_repo_install: 'deb http://nginx.org/packages/ubuntu/ precise nginx'
+nginx_user: www-data
+nginx_group: www-data
+nginx_workers: 2
+nginx_connections: 1024
+
+# unicorn config
+unicorn_workers: 2
+unicorn_timeout: 15
+
+# monit time config
+monit_time: 60
+
+# redis
+redis_name_service: redis-server
+
+# ruby 2.1.3
+
+global_user: root
+global_use_sudo: False
+global_sudo_user:
+
+rubyTmpDir: /usr/local/src
+rubyUrl: http://ftp.ruby-lang.org/pub/ruby/stable/ruby-2.2.2.tar.bz2
+rubyCompressedFile: ruby-2.2.2.tar.bz2
+rubyName: ruby-2.2.2
+tmpRubyPath: /usr/local/src/ruby-2.2.2

@@ -1,0 +1,53 @@
+---
+- name: Set Rails Environment
+  template: >
+    src=env.sh.j2
+    dest=/etc/profile.d/env.sh
+  tags: setup
+
+# - name: Add repository for ubuntu
+#   apt_repository: >
+#     repo='{{ubuntu_repo_install}}'
+#     state=present
+#   tags: setup
+
+- name: Install extra packages
+  apt: "pkg={{item}} state=latest force=yes update_cache=yes"
+  with_items:
+    - build-essential
+    - git
+    - ufw
+    - ntp
+    - libmysqlclient-dev
+    - python-software-properties
+    - libcurl4-openssl-dev
+    - curl
+    - zlib1g-dev
+    - libssl-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - libreadline-dev
+    - nodejs
+  tags: setup
+
+- name: Configure NTP (Network Time Protocol)
+  template: >
+    src=timezone.j2
+    dest=/etc/timezone
+  notify: update tzdata
+  tags: setup
+
+- name: Create user for deploy
+  user: >
+    name=deploy
+    group=www-data
+    comment="Deploy user"
+    state=present
+  tags: setup
+
+- name: Add public key to authorized_keys
+  authorized_key: >
+    user=deploy
+    state=present
+    key="{{lookup('file', '~/.ssh/id_rsa.pub')}}"
+  tags: setup

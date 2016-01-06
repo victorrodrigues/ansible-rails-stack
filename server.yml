@@ -1,0 +1,14 @@
+---
+- name: Projec Name
+  hosts: web
+  sudo: yes
+  user: root
+  gather_facts: False
+
+  roles:
+    - common
+    - ruby
+    - nginx
+    - unicorn
+    - upstart
+    - monit

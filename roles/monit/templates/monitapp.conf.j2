@@ -1,0 +1,3 @@
+check file {{app_name}}-restart.txt with path /var/www/{{app_name}}/shared/{{app_name}}-restart.txt
+  if changed timestamp
+        then exec "/sbin/restart {{app_name}}"
